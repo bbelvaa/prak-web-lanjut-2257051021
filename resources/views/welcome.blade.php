@@ -39,7 +39,7 @@
                 </div>
 
                 <div style="text-align: center;">
-                    <h1 style="font-size: 48px;">Bernadetha Belva Arjanti - 2257051021</h1>
+                    <h1 style="font-size: 60px;">Bernadetha Belva Arjanti - 2257051021</h1>
                 </div>
                 <div class="mt-16">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
