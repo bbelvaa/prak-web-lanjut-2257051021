@@ -18,7 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//Route::get('/profile',[ProfileController::class,'profile']);
-Route::get('/user/profile',[UserController::class,'profile']);
-Route::get('/user/create', [UserCOntroller::class,'create']);
-Route::post('/user/store', [UserController::class, 'store'])->name('user/store');
+
+// Route untuk profil user
+Route::get('/user/profile', [UserController::class, 'profile']);
+
+// Route untuk membuat user
+Route::get('/user/create', [UserController::class, 'create']);
+
+// Route untuk menyimpan user
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
