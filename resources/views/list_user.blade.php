@@ -1,72 +1,16 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
-@section('content')
+@section ('content')
 
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f8c1c1; /* Pink Background */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    .table-container {
-        background-color: white;
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        width: 90%;
-        max-width: 800px;
-        transition: transform 0.3s ease;
-    }
-    .table-container:hover {
-        transform: translateY(-10px); 
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-    th, td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-    th {
-        background-color: #ff6b6b;
-        color: white;
-    }
-    tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    tr:hover {
-        background-color: #f1f1f1;
-    }
-    td {
-        color: #333;
-    }
-    .aksi {
-        text-align: center;
-    }
-    .aksi a {
-        padding: 10px 15px;
-        background-color: #ff6b6b;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.3s;
-    }
-    .aksi a:hover {
-        background-color: #ff4757;
-        transform: scale(1.05);
-    }
-</style>
+<!-- Container untuk membungkus konten -->
+<div class="container">
 
-<div class="table-container">
-    <h1 style="color: #ff6b6b; text-align: center;">Daftar Pengguna</h1>
+    <!-- Tombol Tambah Pengguna Baru di atas tabel -->
+    <div class="mb-3 mt-2 m-3">
+        <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
+    </div>
+
+    <!-- Tabel data pengguna -->
     <table>
         <thead>
             <tr>
@@ -78,14 +22,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($kelas as $user) <!-- Mengganti $kelas menjadi $users -->
             <tr>
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->nama }}</td>
                 <td>{{ $user->npm }}</td>
-                <td>{{ $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan' }}</td>
-                <td class="aksi">
-                    <a href="/user/edit/{{ $user->id }}">Edit</a>
+                <td>{{ $user->kelas->nama_kelas }}</td> <!-- Pastikan relasi kelas sudah diatur -->
+                <td>
+                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning mb-3">Detail</a>
                 </td>
             </tr>
             @endforeach
