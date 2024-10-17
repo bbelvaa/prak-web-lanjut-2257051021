@@ -66,6 +66,66 @@
             color: red;
             margin-bottom: 20px;
         }
+
+        table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #ff6b6b; /* Pink background for headers */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+table tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+table tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Light hover effect */
+}
+
+table td a {
+    padding: 6px 12px;
+    background-color: #ff6b6b;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+}
+
+table td a:hover {
+    background-color: #ff4757; /* Darker pink on hover */
+}
+
+table td {
+    color: #333;
+}
+
+.table-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
     </style>
 </head>
 <body>

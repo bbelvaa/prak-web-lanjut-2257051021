@@ -60,10 +60,9 @@
 <body>
     <div class="profile-container">
         <h1>Profile User</h1>
-        <p><span>Nama:</span> {{ $nama }}</p>
-        <p><span>NPM:</span> {{ $npm }}</p>
-        <p><span>Kelas:</span> {{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</p>
+        <p><span>Nama:</span> {{ $user->nama }}</p>
+        <p><span>NPM:</span> {{ $user->npm }}</p>
+        <p><span>Kelas:</span> {{ $user->nama_kelas ?? 'Kelas tidak ditemukan' }}</p>
         <a href="/user/create">Kembali</a>
-    </div>
+    </div>
 </body>
-</html>
