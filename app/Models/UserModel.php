@@ -34,6 +34,4 @@ class UserModel extends Model
         return $this->join('kelas', 'kelas.id', '=', 'user.kelas_id')->select('user.*', 'kelas.nama_kelas as nama_kelas')->get();
 
     }
-    
-    
 }

@@ -19,6 +19,25 @@ class UserController extends Controller
     $this->kelasModel = new Kelas();
     }
 
+    public function show($id)
+{
+    // Ambil data user beserta relasi kelas
+    $user = $this->userModel->with('kelas')->find($id);
+
+    // Jika user tidak ditemukan, kembalikan error 404
+    if (!$user) {
+        abort(404, 'User not found');
+    }
+
+    // Kirim data user ke view profile
+    $data = [
+        'title' => 'Profile User',
+        'user' => $user,
+    ];
+
+    return view('profile', $data);
+}
+
     public function index() 
         { 
             $data = [ 
@@ -58,45 +77,37 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'nama' => 'required',
-            'npm' => 'required',
-            'kelas_id' => 'required',
-            'foto' => 'image|file|max:2048', // Validasi foto
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'nama' => 'required',
+        'npm' => 'required',
+        'kelas_id' => 'required',
+        'foto' => 'image|file|max:2048', // Validasi foto
+    ]);
 
-        // Proses upload foto
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            // $file->storeAs('upload', $filname, 'public');
-            $file->move('img', $filename);
-        
+    // Proses upload foto
+    if ($request->hasFile('foto')) {
+        $file = $request->file('foto');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename); // Simpan foto ke folder 'uploads'
+
         // Menyimpan data ke database termasuk path foto
         $this->userModel->create([
-        'nama' => $request->input('nama'),
-        'npm' => $request->input('npm'),
-        'kelas_id' => $request->input('kelas_id'),
-        'foto' => $filename, 
-        // Menyimpan path foto
+            'nama' => $request->input('nama'),
+            'npm' => $request->input('npm'),
+            'kelas_id' => $request->input('kelas_id'),
+            'foto' => $filename, // Menyimpan nama file foto
         ]);
-
-        
+    } else {
+        // Jika tidak ada foto, tetap buat user tanpa foto
+        $this->userModel->create([
+            'nama' => $request->input('nama'),
+            'npm' => $request->input('npm'),
+            'kelas_id' => $request->input('kelas_id'),
+        ]);
     }
+
     return redirect()->to('/user');
-
 }
-        public function show($id){
-            $user = $this->userModel->getUser($id);
-
-            $data = [
-                'title' => 'Profile',
-                'user' => $user,
-            ];
-
-            return view('profile', $data);
-    
-        }
 }
