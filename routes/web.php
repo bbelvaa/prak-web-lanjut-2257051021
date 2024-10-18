@@ -31,8 +31,5 @@ Route::get('/show/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/user', [UserController::class, 'index']);
 
-<<<<<<< HEAD
 Route::get('/user/{id}/edit', [UserController::class,'edit'])->name('users.edit');
-=======
 Route::get('/user/{id}/edit', [UserController::class,'edit'])->name('users.edit');
->>>>>>> 07f7ef01c1ea51dbd1b82d0e260d18addcaa1de1
