@@ -70,7 +70,7 @@
 
     <p><span>Nama:</span> {{ $user->nama }}</p>
     <p><span>NPM:</span> {{ $user->npm }}</p>
-    <p><span>Kelas:</span> {{ $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan' }}</p>
+    <p><span>Kelas:</span> {{ $nama_kelas ?? 'Kelas tidak ditemukan'}}</p>
     <a href="/user/create">Kembali</a>
 </div>
 </body>
