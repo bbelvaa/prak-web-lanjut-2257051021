@@ -58,12 +58,19 @@
     </style>
 </head>
 <body>
-    <div class="profile-container">
-        <h1>Profile User</h1>
-        <p><span>Nama:</span> {{ $nama }}</p>
-        <p><span>NPM:</span> {{ $npm }}</p>
-        <p><span>Kelas:</span> {{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</p>
-        <a href="/user/create">Kembali</a>
-    </div>
+<div class="profile-container">
+    <h1>Profile User</h1>
+
+    <!-- Cek apakah user memiliki foto -->
+    @if($user->foto)
+        <img src="{{ asset('uploads/' . $user->foto) }}" alt="Foto Profil" style="width:150px; height:150px; border-radius:50%; margin-bottom:20px;">
+    @else
+        <img src="{{ asset('uploads/default.png') }}" alt="Foto Profil Default" style="width:150px; height:150px; border-radius:50%; margin-bottom:20px;">
+    @endif
+
+    <p><span>Nama:</span> {{ $user->nama }}</p>
+    <p><span>NPM:</span> {{ $user->npm }}</p>
+    <p><span>Kelas:</span> {{ $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan' }}</p>
+    <a href="/user/create">Kembali</a>
+</div>
 </body>
-</html>
