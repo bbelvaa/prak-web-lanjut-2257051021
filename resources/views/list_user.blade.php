@@ -19,6 +19,7 @@
                 <th>NPM</th>
                 <th>Kelas</th>
                 <th>Aksi</th>
+                <th>IPK</th>
             </tr>
         </thead>
         <tbody>
@@ -26,8 +27,9 @@
             <tr>
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->nama }}</td>
-                <td>{{ $user->npm }}</td>
+                <td>{{ $user->npm }}</td> 
                 <td>{{ $user->kelas->nama_kelas }}</td> <!-- Pastikan relasi kelas sudah diatur -->
+                <td>{{ $user->ipk ?? '-' }}</td>
                 <td>
                     <a href="{{ route('users.show', $user['id']) }}" class="btn btn-primary btn-sm">View</a>
                     <a href="{{ route('user.edit', $user['id']) }}" class="btn btn-warning btn-sm">Edit</a>

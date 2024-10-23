@@ -27,7 +27,9 @@ class UserController extends Controller
     return view('show_user', [
         'title' => 'Show User',
         'user' => $user,
-        'nama_kelas' => $kelas ? $kelas->nama_kelas : null, 
+        'nama_kelas' => $kelas ? $kelas->nama_kelas : null,
+        'nama_mhs' => $user->nama, // Tambahkan nama pengguna
+        'ipk' => $user->ipk, // Tambahkan IPK pengguna
     ]);
 }
 
@@ -72,9 +74,18 @@ class UserController extends Controller
     public function update(Request $request, $id){
         $user = UserModel::findOrFail($id);
 
+        $request->validate([
+            'nama' => 'required',
+            //'npm' => 'required',
+            'kelas_id' => 'required',
+            'ipk' => 'nullable|numeric|min:0|max:4', // Validasi untuk kolom IPK
+            'foto' => 'image|file|max:2048',
+        ]);
+
         $user->nama = $request->nama;
-        $user->npm = $request->npm;
+        //$user->npm = $request->npm;
         $user->kelas_id = $request->kelas_id;
+        $user->ipk = $request->ipk;
 
         if ($request->hasFile('foto')){
             $fileName = time() . '.' . $request->foto->extension();
@@ -108,9 +119,11 @@ class UserController extends Controller
     // Validasi input
     $request->validate([
         'nama' => 'required',
-        'npm' => 'required',
+        //'npm' => 'required',
         'kelas_id' => 'required',
         'foto' => 'image|file|max:2048', // Validasi foto
+        'ipk' => 'nullable|numeric|min:0|max:4', //Validasi ipk
+
     ]);
 
     // Proses upload foto
@@ -122,19 +135,21 @@ class UserController extends Controller
         // Menyimpan data ke database termasuk path foto
         $this->userModel->create([
             'nama' => $request->input('nama'),
-            'npm' => $request->input('npm'),
+            //'npm' => $request->input('npm'),
             'kelas_id' => $request->input('kelas_id'),
             'foto' => $filename, // Menyimpan nama file foto
+            'ipk' => $request->input('ipk'), // Menyimpan IPK
+
         ]);
     } else {
         // Jika tidak ada foto, tetap buat user tanpa foto
         $this->userModel->create([
             'nama' => $request->input('nama'),
-            'npm' => $request->input('npm'),
+            //'npm' => $request->input('npm'),
             'kelas_id' => $request->input('kelas_id'),
+            'ipk' => $request->input('ipk'), // Menyimpan IPK
         ]);
     }
 
-    return redirect()->to('/user');
-}
+    return redirect()->to('/user')->with('success', 'User Created Successfully');}
 }

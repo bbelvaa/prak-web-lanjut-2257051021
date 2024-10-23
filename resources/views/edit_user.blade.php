@@ -14,13 +14,13 @@
         @endforeach
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="npm" class="form-label">NPM :</label>
         <input type="text" class="form-control"  id="npn" name="npm" value="{{ old('npm', $user->npm) }}">
         @foreach ($errors->get('npm') as $msg)
             <p class="error">{{ $msg }}</p>
         @endforeach
-    </div>
+    </div> -->
 
     <div class="form-group">
         <label for="kelas_id">Kelas :</label>
@@ -33,6 +33,14 @@
             @endforeach
         </select>
         @foreach ($errors->get('kelas_id') as $msg)
+        <p class="error">{{ $msg }}</p>
+        @endforeach
+    </div>
+
+    <div class="form-group">
+        <label for="ipk">IPK :</label>
+        <input type="number" step="0.01" id="ipk" name="ipk" placeholder="Masukkan IPK (0.00 - 4.00)" value="{{ old('ipk', $user->ipk) }}">
+        @foreach ($errors->get('ipk') as $msg)
         <p class="error">{{ $msg }}</p>
         @endforeach
     </div>
